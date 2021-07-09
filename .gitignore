@@ -1,5 +1,7 @@
 # Project exclude paths
 sample.data
+myout.txt
+stdout.txt
 reference/
 data/
 run.py/
@@ -26,6 +28,3 @@ myTest.py
 myout.txt
 OrderVersion/
 testcases/
-myout.txt
-stdout.txt
-sample.data
