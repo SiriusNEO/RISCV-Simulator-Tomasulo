@@ -1,0 +1,56 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/mnt/c/Users/17138/Desktop/RISC-V Simulator/Tomasulo/components.hpp
+include.hpp
+/mnt/c/Users/17138/Desktop/RISC-V Simulator/Tomasulo/include.hpp
+
+/mnt/c/Users/17138/Desktop/RISC-V Simulator/Tomasulo/cpu_core.hpp
+decoder.hpp
+/mnt/c/Users/17138/Desktop/RISC-V Simulator/Tomasulo/decoder.hpp
+components.hpp
+/mnt/c/Users/17138/Desktop/RISC-V Simulator/Tomasulo/components.hpp
+tomasulo_components.hpp
+/mnt/c/Users/17138/Desktop/RISC-V Simulator/Tomasulo/tomasulo_components.hpp
+
+/mnt/c/Users/17138/Desktop/RISC-V Simulator/Tomasulo/cpu_stages.cpp
+cpu_core.hpp
+/mnt/c/Users/17138/Desktop/RISC-V Simulator/Tomasulo/cpu_core.hpp
+
+/mnt/c/Users/17138/Desktop/RISC-V Simulator/Tomasulo/decoder.hpp
+include.hpp
+/mnt/c/Users/17138/Desktop/RISC-V Simulator/Tomasulo/include.hpp
+
+/mnt/c/Users/17138/Desktop/RISC-V Simulator/Tomasulo/include.hpp
+cstdio
+-
+iostream
+-
+cstring
+-
+sstream
+-
+map
+-
+unordered_map
+-
+algorithm
+-
+cstdlib
+-
+iomanip
+-
+assert.h
+-
+queue
+-
+
+/mnt/c/Users/17138/Desktop/RISC-V Simulator/Tomasulo/tomasulo_components.hpp
+include.hpp
+/mnt/c/Users/17138/Desktop/RISC-V Simulator/Tomasulo/include.hpp
+

@@ -1,0 +1,569 @@
+Important Out: build finish. size: 4764
+
+* ROB *
+[Input] CDB: empty
+CDB: empty
+[Output] CDB: empty
+
+* SLB *
+[Input] CDB: empty
+[Output] CDB: empty
+
+* RS *
+[Input] CDB: empty
+[Output] CDB: empty
+
+* RF *
+[Input] CDB: empty
+CDB: empty
+
+* IQ *
+[Input] 0
+[Output] 20137
+
+* IS *
+[Input] 20137
+[Output] LUI rd:2 rs1:0 rs2:0 imm:131072
+CDB: IS to RF
+Q:0 V:0 rd:2
+CDB: IS to RS
+LUI Q1:-1 Q2:-1 V1:0 V2:0 ROB_id:0
+CDB: IS to ROB
+LUI pc:0
+CDB: empty
+RegFile
+zero: Q:-1 V:0 
+ra: Q:-1 V:0 
+sp: Q:-1 V:0 
+gp: Q:-1 V:0 
+tp: Q:-1 V:0 
+t0: Q:-1 V:0 
+t1: Q:-1 V:0 
+t2: Q:-1 V:0 
+fp: Q:-1 V:0 
+s1: Q:-1 V:0 
+a0: Q:-1 V:0 
+a1: Q:-1 V:0 
+a2: Q:-1 V:0 
+a3: Q:-1 V:0 
+a4: Q:-1 V:0 
+a5: Q:-1 V:0 
+a6: Q:-1 V:0 
+a7: Q:-1 V:0 
+s2: Q:-1 V:0 
+s3: Q:-1 V:0 
+s4: Q:-1 V:0 
+s5: Q:-1 V:0 
+s6: Q:-1 V:0 
+s7: Q:-1 V:0 
+s8: Q:-1 V:0 
+s9: Q:-1 V:0 
+s10: Q:-1 V:0 
+s11: Q:-1 V:0 
+t3: Q:-1 V:0 
+t4: Q:-1 V:0 
+t5: Q:-1 V:0 
+t6: Q:-1 V:0 
+Important Out: LUI0
+
+* ROB *
+[Input] CDB: IS to ROB
+LUI pc:0
+CDB: empty
+[Output] CDB: empty
+
+* SLB *
+[Input] CDB: empty
+[Output] CDB: empty
+
+* RS *
+[Input] CDB: IS to RS
+LUI Q1:-1 Q2:-1 V1:0 V2:0 ROB_id:0
+[Output] CDB: empty
+
+* RF *
+[Input] CDB: empty
+CDB: IS to RF
+Q:0 V:0 rd:2
+
+* IQ *
+[Input] 4
+[Output] 40010ef
+
+* IS *
+[Input] 40010ef
+[Output] JAL rd:1 rs1:0 rs2:0 imm:4160
+CDB: IS to RF
+Q:1 V:0 rd:1
+CDB: IS to RS
+JAL Q1:-1 Q2:-1 V1:0 V2:0 ROB_id:1
+CDB: IS to ROB
+JAL pc:4
+CDB: empty
+RegFile
+zero: Q:-1 V:0 
+ra: Q:-1 V:0 
+sp: Q:0 V:0 
+gp: Q:-1 V:0 
+tp: Q:-1 V:0 
+t0: Q:-1 V:0 
+t1: Q:-1 V:0 
+t2: Q:-1 V:0 
+fp: Q:-1 V:0 
+s1: Q:-1 V:0 
+a0: Q:-1 V:0 
+a1: Q:-1 V:0 
+a2: Q:-1 V:0 
+a3: Q:-1 V:0 
+a4: Q:-1 V:0 
+a5: Q:-1 V:0 
+a6: Q:-1 V:0 
+a7: Q:-1 V:0 
+s2: Q:-1 V:0 
+s3: Q:-1 V:0 
+s4: Q:-1 V:0 
+s5: Q:-1 V:0 
+s6: Q:-1 V:0 
+s7: Q:-1 V:0 
+s8: Q:-1 V:0 
+s9: Q:-1 V:0 
+s10: Q:-1 V:0 
+s11: Q:-1 V:0 
+t3: Q:-1 V:0 
+t4: Q:-1 V:0 
+t5: Q:-1 V:0 
+t6: Q:-1 V:0 
+Important Out: LUI0
+
+* ROB *
+[Input] CDB: IS to ROB
+JAL pc:4
+CDB: empty
+[Output] CDB: empty
+
+* SLB *
+[Input] CDB: empty
+[Output] CDB: empty
+
+* RS *
+[Input] CDB: IS to RS
+JAL Q1:-1 Q2:-1 V1:0 V2:0 ROB_id:1
+[Output] CDB: RS to EX
+LUI rd:2 A:0 B:0 imm:131072 pc:0
+
+* RF *
+[Input] CDB: empty
+CDB: IS to RF
+Q:1 V:0 rd:1
+
+* IQ *
+[Input] 8
+[Output] ff00513
+
+* IS *
+[Input] ff00513
+[Output] END rd:0 rs1:0 rs2:0 imm:0
+CDB: IS to RF
+Q:2 V:0 rd:0
+CDB: IS to RS
+END Q1:-1 Q2:-1 V1:0 V2:0 ROB_id:2
+CDB: IS to ROB
+END pc:8
+CDB: empty
+
+* EX *
+[Input] CDB: RS to EX
+LUI rd:2 A:0 B:0 imm:131072 pc:0
+[Output] CDB: EX Result
+LUI aluout:131072 rd:2 hit:0 tarpc:0
+RegFile
+zero: Q:-1 V:0 
+ra: Q:1 V:0 
+sp: Q:0 V:0 
+gp: Q:-1 V:0 
+tp: Q:-1 V:0 
+t0: Q:-1 V:0 
+t1: Q:-1 V:0 
+t2: Q:-1 V:0 
+fp: Q:-1 V:0 
+s1: Q:-1 V:0 
+a0: Q:-1 V:0 
+a1: Q:-1 V:0 
+a2: Q:-1 V:0 
+a3: Q:-1 V:0 
+a4: Q:-1 V:0 
+a5: Q:-1 V:0 
+a6: Q:-1 V:0 
+a7: Q:-1 V:0 
+s2: Q:-1 V:0 
+s3: Q:-1 V:0 
+s4: Q:-1 V:0 
+s5: Q:-1 V:0 
+s6: Q:-1 V:0 
+s7: Q:-1 V:0 
+s8: Q:-1 V:0 
+s9: Q:-1 V:0 
+s10: Q:-1 V:0 
+s11: Q:-1 V:0 
+t3: Q:-1 V:0 
+t4: Q:-1 V:0 
+t5: Q:-1 V:0 
+t6: Q:-1 V:0 
+Important Out: LUI0
+
+* ROB *
+[Input] CDB: IS to ROB
+END pc:8
+CDB: EX Result
+LUI aluout:131072 rd:2 hit:0 tarpc:0
+[Output] CDB: ROB to COM
+LUI val:131072
+
+* SLB *
+[Input] CDB: empty
+[Output] CDB: empty
+
+* RS *
+[Input] CDB: IS to RS
+END Q1:-1 Q2:-1 V1:0 V2:0 ROB_id:2
+[Output] CDB: RS to EX
+JAL rd:1 A:0 B:0 imm:4160 pc:4
+
+* RF *
+[Input] CDB: empty
+CDB: IS to RF
+Q:2 V:0 rd:0
+
+* IQ *
+[Input] 12
+[Output] 306b7
+
+* IS *
+[Input] 306b7
+[Output] LUI rd:13 rs1:0 rs2:0 imm:196608
+CDB: IS to RF
+Q:3 V:0 rd:13
+CDB: IS to RS
+LUI Q1:-1 Q2:-1 V1:0 V2:0 ROB_id:3
+CDB: IS to ROB
+LUI pc:12
+CDB: empty
+
+* EX *
+[Input] CDB: RS to EX
+JAL rd:1 A:0 B:0 imm:4160 pc:4
+[Output] CDB: EX Result
+JAL aluout:8 rd:1 hit:1 tarpc:4164
+
+* COM *
+[Input] CDB: ROB to COM
+LUI val:131072
+[Output] CDB: COM to PUB
+LUI jump:0 jumptar:0
+RegFile
+zero: Q:-1 V:0 
+ra: Q:1 V:0 
+sp: Q:0 V:0 
+gp: Q:-1 V:0 
+tp: Q:-1 V:0 
+t0: Q:-1 V:0 
+t1: Q:-1 V:0 
+t2: Q:-1 V:0 
+fp: Q:-1 V:0 
+s1: Q:-1 V:0 
+a0: Q:-1 V:0 
+a1: Q:-1 V:0 
+a2: Q:-1 V:0 
+a3: Q:-1 V:0 
+a4: Q:-1 V:0 
+a5: Q:-1 V:0 
+a6: Q:-1 V:0 
+a7: Q:-1 V:0 
+s2: Q:-1 V:0 
+s3: Q:-1 V:0 
+s4: Q:-1 V:0 
+s5: Q:-1 V:0 
+s6: Q:-1 V:0 
+s7: Q:-1 V:0 
+s8: Q:-1 V:0 
+s9: Q:-1 V:0 
+s10: Q:-1 V:0 
+s11: Q:-1 V:0 
+t3: Q:-1 V:0 
+t4: Q:-1 V:0 
+t5: Q:-1 V:0 
+t6: Q:-1 V:0 
+Important Out: JAL4164
+
+* ROB *
+[Input] CDB: IS to ROB
+LUI pc:12
+CDB: EX Result
+JAL aluout:8 rd:1 hit:1 tarpc:4164
+[Output] CDB: ROB to COM
+JAL val:8
+
+* SLB *
+[Input] CDB: empty
+[Output] CDB: empty
+
+* RS *
+[Input] CDB: IS to RS
+LUI Q1:-1 Q2:-1 V1:0 V2:0 ROB_id:3
+[Output] CDB: RS to EX
+END rd:0 A:0 B:0 imm:0 pc:8
+
+* RF *
+[Input] CDB: CDB: IS to RF
+Q:3 V:0 rd:13
+
+* IQ *
+[Input] 16
+[Output] a68223
+
+* IS *
+[Input] a68223
+[Output] SB rd:0 rs1:13 rs2:10 imm:4
+CDB: IS to RF
+Q:4 V:0 rd:0
+CDB: empty
+CDB: IS to ROB
+SB pc:16
+CDB: IS to SLB
+SB Q1:3 Q2:-1 V1:0 V2:0 ROB_id:4
+
+* EX *
+[Input] CDB: RS to EX
+END rd:0 A:0 B:0 imm:0 pc:8
+[Output] CDB: EX Result
+END aluout:0 rd:0 hit:0 tarpc:0
+
+* COM *
+[Input] CDB: ROB to COM
+JAL val:8
+[Output] CDB: COM to PUB
+JAL jump:1 jumptar:4164
+RegFile
+zero: Q:-1 V:0 
+ra: Q:1 V:0 
+sp: Q:-1 V:131072 
+gp: Q:-1 V:0 
+tp: Q:-1 V:0 
+t0: Q:-1 V:0 
+t1: Q:-1 V:0 
+t2: Q:-1 V:0 
+fp: Q:-1 V:0 
+s1: Q:-1 V:0 
+a0: Q:-1 V:0 
+a1: Q:-1 V:0 
+a2: Q:-1 V:0 
+a3: Q:3 V:0 
+a4: Q:-1 V:0 
+a5: Q:-1 V:0 
+a6: Q:-1 V:0 
+a7: Q:-1 V:0 
+s2: Q:-1 V:0 
+s3: Q:-1 V:0 
+s4: Q:-1 V:0 
+s5: Q:-1 V:0 
+s6: Q:-1 V:0 
+s7: Q:-1 V:0 
+s8: Q:-1 V:0 
+s9: Q:-1 V:0 
+s10: Q:-1 V:0 
+s11: Q:-1 V:0 
+t3: Q:-1 V:0 
+t4: Q:-1 V:0 
+t5: Q:-1 V:0 
+t6: Q:-1 V:0 
+
+* ROB *
+[Input] CDB: IS to ROB
+SB pc:16
+CDB: EX Result
+END aluout:0 rd:0 hit:0 tarpc:0
+[Output] CDB: empty
+
+* SLB *
+[Input] CDB: empty
+[Output] CDB: empty
+
+* RS *
+[Input] CDB: empty
+[Output] CDB: empty
+
+* RF *
+[Input] CDB: CDB: empty
+
+* IQ *
+[Input] 4164
+[Output] ff010113
+
+* IS *
+[Input] ff010113
+[Output] ADDI rd:2 rs1:2 rs2:0 imm:4294967280
+CDB: IS to RF
+Q:0 V:0 rd:2
+CDB: IS to RS
+ADDI Q1:-1 Q2:-1 V1:131072 V2:0 ROB_id:0
+CDB: IS to ROB
+ADDI pc:4164
+CDB: empty
+RegFile
+zero: Q:-1 V:0 
+ra: Q:-1 V:8 
+sp: Q:-1 V:131072 
+gp: Q:-1 V:0 
+tp: Q:-1 V:0 
+t0: Q:-1 V:0 
+t1: Q:-1 V:0 
+t2: Q:-1 V:0 
+fp: Q:-1 V:0 
+s1: Q:-1 V:0 
+a0: Q:-1 V:0 
+a1: Q:-1 V:0 
+a2: Q:-1 V:0 
+a3: Q:-1 V:0 
+a4: Q:-1 V:0 
+a5: Q:-1 V:0 
+a6: Q:-1 V:0 
+a7: Q:-1 V:0 
+s2: Q:-1 V:0 
+s3: Q:-1 V:0 
+s4: Q:-1 V:0 
+s5: Q:-1 V:0 
+s6: Q:-1 V:0 
+s7: Q:-1 V:0 
+s8: Q:-1 V:0 
+s9: Q:-1 V:0 
+s10: Q:-1 V:0 
+s11: Q:-1 V:0 
+t3: Q:-1 V:0 
+t4: Q:-1 V:0 
+t5: Q:-1 V:0 
+t6: Q:-1 V:0 
+Important Out: ADDI4164
+
+* ROB *
+[Input] CDB: IS to ROB
+ADDI pc:4164
+CDB: empty
+[Output] CDB: empty
+
+* SLB *
+[Input] CDB: empty
+[Output] CDB: empty
+
+* RS *
+[Input] CDB: IS to RS
+ADDI Q1:-1 Q2:-1 V1:131072 V2:0 ROB_id:0
+[Output] CDB: empty
+
+* RF *
+[Input] CDB: empty
+CDB: IS to RF
+Q:0 V:0 rd:2
+
+* IQ *
+[Input] 4168
+[Output] 112623
+
+* IS *
+[Input] 112623
+[Output] SW rd:0 rs1:2 rs2:1 imm:12
+CDB: IS to RF
+Q:1 V:0 rd:0
+CDB: empty
+CDB: IS to ROB
+SW pc:4168
+CDB: IS to SLB
+SW Q1:0 Q2:-1 V1:0 V2:8 ROB_id:1
+RegFile
+zero: Q:-1 V:0 
+ra: Q:-1 V:8 
+sp: Q:0 V:131072 
+gp: Q:-1 V:0 
+tp: Q:-1 V:0 
+t0: Q:-1 V:0 
+t1: Q:-1 V:0 
+t2: Q:-1 V:0 
+fp: Q:-1 V:0 
+s1: Q:-1 V:0 
+a0: Q:-1 V:0 
+a1: Q:-1 V:0 
+a2: Q:-1 V:0 
+a3: Q:-1 V:0 
+a4: Q:-1 V:0 
+a5: Q:-1 V:0 
+a6: Q:-1 V:0 
+a7: Q:-1 V:0 
+s2: Q:-1 V:0 
+s3: Q:-1 V:0 
+s4: Q:-1 V:0 
+s5: Q:-1 V:0 
+s6: Q:-1 V:0 
+s7: Q:-1 V:0 
+s8: Q:-1 V:0 
+s9: Q:-1 V:0 
+s10: Q:-1 V:0 
+s11: Q:-1 V:0 
+t3: Q:-1 V:0 
+t4: Q:-1 V:0 
+t5: Q:-1 V:0 
+t6: Q:-1 V:0 
+Important Out: ADDI4164
+
+* ROB *
+[Input] CDB: IS to ROB
+SW pc:4168
+CDB: empty
+[Output] CDB: empty
+
+* SLB *
+[Input] CDB: IS to SLB
+SW Q1:0 Q2:-1 V1:0 V2:8 ROB_id:1
+[Output] CDB: empty
+
+* RS *
+[Input] CDB: empty
+[Output] CDB: RS to EX
+ADDI rd:2 A:131072 B:0 imm:4294967280 pc:4164
+
+* RF *
+[Input] CDB: empty
+CDB: IS to RF
+Q:1 V:0 rd:0
+
+* IQ *
+[Input] 4172
+[Output] 17b7
+
+* IS *
+[Input] 17b7
+[Output] LUI rd:15 rs1:0 rs2:0 imm:4096
+CDB: IS to RF
+Q:2 V:0 rd:15
+CDB: IS to RS
+LUI Q1:-1 Q2:-1 V1:0 V2:0 ROB_id:2
+CDB: IS to ROB
+LUI pc:4172
+CDB: empty
+
+* EX *
+[Input] CDB: RS to EX
+ADDI rd:2 A:131072 B:0 imm:4294967280 pc:4164
+[Output] CDB: EX Result
+ADDI aluout:131056 rd:2 hit:0 tarpc:0
+RegFile
+zero: Q:-1 V:0 
+ra: Q:-1 V:8 
+sp: Q:0 V:131072 
+gp: Q:-1 V:0 
+tp: Q:-1 V:0 
+t0: Q:-1 V:0 
+t1: Q:-1 V:0 
+t2: Q:-1 V:0 
+fp: Q:-1 V:0 
+s1: Q:-1 V:0 
+a0: Q:-1 V:0 
+a1:
