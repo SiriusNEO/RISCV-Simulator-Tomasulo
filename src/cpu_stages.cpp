@@ -25,9 +25,9 @@ namespace RISC_V {
     }
 
     void CPU::issue() { //to ROB, to RS, to SLB
-        if (ROB_prev.full()) return; //ROB full
-        auto newIQ = IQ.deque();
         IS_RF.clear(); IS_RS.clear(); IS_SLB.clear(); IS_ROB.clear();
+        if (ROB_prev.full() || RS_prev.full() || SLB_prev.full()) return; //full, wait
+        auto newIQ = IQ.deque();
         Instruction inst;
         id.decode(newIQ.insCode, inst);
 
@@ -113,7 +113,7 @@ namespace RISC_V {
             RS_EX.toEX_B = RS_prev.node[exPos].V2;
             RS_EX.toEX_pc = RS_prev.node[exPos].pc;
             RS_EX.toEX_ROB_id = RS_prev.node[exPos].ROB_id;
-            RS_nxt.node[exPos].clear(); //delete
+            RS_nxt.del(exPos);
         }
 #ifdef DEBUG
         std::cout << '\n' << "* RS *" << '\n';
@@ -143,12 +143,11 @@ namespace RISC_V {
         if (!SLB_prev.q.empty()) {
             auto& qf = SLB_prev.q.getHead();
             if (qf.isReady()) {
-                if (qf.IR.ins > LHU && qf.tim == -1) {
-                    SLB_PUB_nxt.valid = true; //SLB->ROB, make it ready
-                    SLB_PUB_nxt.toPUB_inst = qf.IR;
-                    SLB_PUB_nxt.toPUB_rd = qf.IR.rd;
-                    SLB_PUB_nxt.toPUB_ROB_id = qf.ROB_id; //S loadOut does not matter
-                    SLB_nxt.q.getHead().tim = 0;
+                if (qf.tim == -1) { //mem 3 cycle
+                    SLB_nxt.q.getHead().tim = 2;
+                }
+                else if (qf.tim > 0) {
+                    SLB_nxt.q.getHead().tim = qf.tim - 1;
                 }
                 else {
                     auto memTar = qf.V1 + qf.IR.imm;
@@ -156,8 +155,8 @@ namespace RISC_V {
                     SLB_PUB_nxt.toPUB_inst = qf.IR;
                     SLB_PUB_nxt.toPUB_rd = qf.IR.rd;
                     SLB_PUB_nxt.toPUB_ROB_id = qf.ROB_id;
+                    SLB_nxt.deque();
                     if (qf.IR.ins <= LHU) {
-                        SLB_nxt.q.deque();
                         switch (qf.IR.ins) {
                             case LB: {
                                 SLB_PUB_nxt.toPUB_loadOut = mem.reads(memTar, 1);
@@ -181,8 +180,6 @@ namespace RISC_V {
                                 break;
                         }
                     } else {
-                        if (COM_PUB.valid && COM_PUB.toPUB_inst == qf.IR) {//S should wait commit
-                            SLB_nxt.q.deque();
                             switch (qf.IR.ins) {
                                 case SB: {
                                     mem.write(memTar, qf.V2, 1);
@@ -197,7 +194,6 @@ namespace RISC_V {
                                 }
                                     break;
                             }
-                        }
                     }
                 }
             }
@@ -264,7 +260,6 @@ namespace RISC_V {
         ROB_COM.clear();
         if (!ROB_nxt.empty()) {
             auto& qf = ROB_nxt.getHead();
-            //MINE(insName[qf.IR.ins] << qf.pc)
             if (qf.ready) {
                 ROB_COM.valid = true;
                 ROB_COM.toCOM = qf;

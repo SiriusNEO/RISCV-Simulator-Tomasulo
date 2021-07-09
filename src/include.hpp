@@ -22,11 +22,11 @@
 
 //#define DEBUG
 //#define LOCAL
-#define MINE(_x) std::cout << "Important Out: " << _x << '\n';
+//#define MINE(_x) std::cout << "Important Out: " << _x << '\n';
 
 namespace RISC_V {
     const size_t REG_N = 32, MEM_SIZE = 500000, FUNCTION_RETURN = 10, RETURN_ADDRESS = 1;
-    const size_t BUFF_N = 64;
+    const size_t RS_N = 32, ROB_N = 32, IQ_N = 1024, SLB_N = 32;
 
     enum InsType {NOP, HALT, LUI, AUIPC, JAL, JALR, BEQ, BNE, BLT, BGE, BLTU, BGEU, LB, LH, LW, LBU,
         LHU, SB, SH, SW, ADDI, SLTI, SLTIU, XORI, ORI, ANDI, SLLI, SRLI, SRAI, ADD,
@@ -70,15 +70,20 @@ namespace RISC_V {
     struct Queue {
         T que[SIZ+1];
         size_t head, tail;
+
+        Queue() {
+            head = tail = 0;
+        }
+
         void clear() {head = tail = 0;}
         bool empty() {return head == tail;}
-        bool full() {return (tail+1)%SIZ == head;}
+        bool full() {return (tail+1)%(SIZ+1) == head;}
         void enque(const T& val) {
-            que[tail] = val, tail = (tail + 1) % SIZ;
+            que[tail] = val, tail = (tail + 1) % (SIZ+1);
         }
         T deque() {
             auto ret = que[head];
-            head = (head + 1) % SIZ;
+            head = (head + 1) % (SIZ+1);
             return ret;
         }
         T& getHead() {

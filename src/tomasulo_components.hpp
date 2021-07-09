@@ -54,17 +54,30 @@ namespace RISC_V {
     };
 
     template<size_t SIZ>
-    struct ReservationStation {
-        RSNode node[SIZ];
+    class ReservationStation {
+    private:
+            size_t siz;
+    public:
+            RSNode node[SIZ];
+
+
+        ReservationStation(): siz(0) {
+            for (int i = 0; i < SIZ; ++i) node[i].clear();
+        }
+
+        bool full() {return siz >= SIZ;}
+
         void insert(const RSNode& newNode) {
             for (int i = 0; i < SIZ; ++i) {
                 if (!node[i].busy) {
                     node[i] = newNode;
                     node[i].busy = true;
+                    ++siz;
                     return;
                 }
             }
         }
+
         void muxWrite(size_t ROB_id, uint32_t V) {
             for (int i = 0; i < SIZ; ++i)
                 if (node[i].busy) {
@@ -72,12 +85,22 @@ namespace RISC_V {
                     else if (node[i].Q2 == ROB_id) node[i].V2 = V, node[i].Q2 = -1;
                 }
         }
+
         int exFind() {
             for (int i = 0; i < SIZ; ++i)
-                if (node[i].isReady()) return i;
+                if (node[i].isReady()) {
+                    return i;
+                }
             return -1;
         }
+
+        void del(size_t pos) {
+            node[pos].clear();
+            --siz;
+        }
+
         void clear() {
+            siz = 0;
             for (int i = 0; i < SIZ; ++i)
                 node[i].clear();
         }
@@ -104,6 +127,7 @@ namespace RISC_V {
         uint32_t V1, V2;
         int Q1, Q2, tim, ROB_id;
         uint32_t pc;
+
         void clear() {
             busy = false;
             IR.init();
@@ -112,25 +136,44 @@ namespace RISC_V {
             ROB_id = -1;
             pc = 0;
         }
+
         bool isReady() {
             return busy && Q1 == -1 && Q2 == -1;
         }
     };
 
     template<size_t SIZ>
-    struct StoreLoadBuffer {
+    class StoreLoadBuffer {
+    private:
+        size_t siz;
+
+    public:
         Queue<SLBNode> q;
-        void muxWrite(size_t ROB_id, uint32_t V) { //FIX?
+
+        StoreLoadBuffer(): siz(0), q() {}
+
+        void muxWrite(size_t ROB_id, uint32_t V) {
             for (int i = 0; i < SIZ; ++i)
                 if (q.que[i].busy) {
                     if (q.que[i].Q1 == ROB_id) q.que[i].V1 = V, q.que[i].Q1 = -1;
                     else if (q.que[i].Q2 == ROB_id) q.que[i].V2 = V, q.que[i].Q2 = -1;
                 }
         }
+
+        bool full() {return siz >= SIZ;}
+
         void insert(const SLBNode& newNode) {
             q.enque(newNode);
+            ++siz;
         }
+
+        void deque() {
+            q.deque();
+            --siz;
+        }
+
         void clear() {
+            siz = 0;
             q.clear();
         }
     };
@@ -172,6 +215,7 @@ namespace RISC_V {
             toPUB_rd = toPUB_ALUOut = toPUB_loadOut = toPUB_tarpc = 0; toPUB_ROB_id = -1;
             toPUB_hit = false;
             toPUB_jumpFlag = false; //remember clear
+            //don't clear isCommit
         }
 
         void debug(CDBType type) {

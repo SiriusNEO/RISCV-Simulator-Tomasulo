@@ -3,14 +3,16 @@ project(RISC_V_Simulator)
 
 set(CMAKE_CXX_STANDARD 14)
 
+include_directories(src)
+
 add_definitions(-O3)
 
 add_executable(code
         CMakeLists.txt
-        main.cpp
-        cpu_stages.cpp
-        components.hpp
-        cpu_core.hpp
-        decoder.hpp
-        include.hpp
+        src/main.cpp
+        src/cpu_stages.cpp
+        src/components.hpp
+        src/cpu_core.hpp
+        src/decoder.hpp
+        src/include.hpp
         )

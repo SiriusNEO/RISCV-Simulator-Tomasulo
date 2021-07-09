@@ -23,11 +23,18 @@ namespace RISC_V {
 
         void run() {
             while (true) {
-                reorderBuffer();
-                storeLoadBuffer();
-                reservation();
-                regFile();
-                instructionQueue();
+                int order[5] = {0, 1, 2, 3, 4};
+                std::random_shuffle(order, order+5); //simulate parallel
+
+                for (int i = 0; i < 5; ++i)
+                    (this->*stageFunc[order[i]])();
+                /*
+                    reorderBuffer();
+                    storeLoadBuffer();
+                    reservation();
+                    regFile();
+                    instructionQueue();
+                */
                 update();
                 if (ROB_COM.toCOM.IR.ins == HALT) {
                     std::cout << (RF_prev.regs[FUNCTION_RETURN].V & 255u) << '\n';
@@ -42,17 +49,19 @@ namespace RISC_V {
             }
         }
         private:
+            void (CPU::*stageFunc[5])() = {&CPU::instructionQueue, &CPU::regFile, &CPU::reservation,
+                                           &CPU::storeLoadBuffer, &CPU::reorderBuffer};
 
             uint32_t pc;
             Decoder id;
             Memory mem;
             ALU alu;
 
-            Queue<IQNode, BUFF_N> IQ;
-            ReservationStation<BUFF_N> RS_prev, RS_nxt;
+            Queue<IQNode, IQ_N> IQ;
+            ReservationStation<RS_N> RS_prev, RS_nxt;
             RegFile<REG_N> RF_prev, RF_nxt;
-            StoreLoadBuffer<BUFF_N> SLB_prev, SLB_nxt;
-            Queue<ROBNode, BUFF_N> ROB_prev, ROB_nxt;
+            StoreLoadBuffer<SLB_N> SLB_prev, SLB_nxt;
+            Queue<ROBNode, ROB_N> ROB_prev, ROB_nxt;
 
             //INPUT_OUTPUT
             CDBNode IS_RF, COM_RF, IS_RS, RS_EX, IS_ROB, ROB_COM, IS_SLB, EX_PUB, COM_PUB, SLB_PUB_prev, SLB_PUB_nxt;
