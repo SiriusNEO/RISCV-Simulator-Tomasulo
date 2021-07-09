@@ -26,7 +26,7 @@
 
 namespace RISC_V {
     const size_t REG_N = 32, MEM_SIZE = 500000, FUNCTION_RETURN = 10, RETURN_ADDRESS = 1;
-    const size_t RS_N = 32, ROB_N = 32, IQ_N = 1024, SLB_N = 32;
+    const size_t RS_N = 64, ROB_N = 64, IQ_N = 1024, SLB_N = 64;
 
     enum InsType {NOP, HALT, LUI, AUIPC, JAL, JALR, BEQ, BNE, BLT, BGE, BLTU, BGEU, LB, LH, LW, LBU,
         LHU, SB, SH, SW, ADDI, SLTI, SLTIU, XORI, ORI, ANDI, SLLI, SRLI, SRAI, ADD,

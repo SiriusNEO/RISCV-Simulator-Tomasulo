@@ -15,7 +15,7 @@ namespace RISC_V {
 
     class CPU {
     public:
-        explicit CPU():pc(0), mem() {
+        explicit CPU():pc(0), mem(), memClock(0), RS_prev(), RS_nxt(), SLB_prev(), SLB_nxt(), IQ(), ROB_prev(), ROB_nxt() {
             IS_RF.clear(), COM_RF.clear(), IS_RS.clear(), RS_EX.clear(),
             IS_ROB.clear(), ROB_COM.clear(), IS_SLB.clear(), EX_PUB.clear(),
             COM_PUB.clear(), SLB_PUB_prev.clear(), SLB_PUB_nxt.clear();
@@ -25,16 +25,7 @@ namespace RISC_V {
             while (true) {
                 int order[5] = {0, 1, 2, 3, 4};
                 std::random_shuffle(order, order+5); //simulate parallel
-
-                for (int i = 0; i < 5; ++i)
-                    (this->*stageFunc[order[i]])();
-                /*
-                    reorderBuffer();
-                    storeLoadBuffer();
-                    reservation();
-                    regFile();
-                    instructionQueue();
-                */
+                for (int i = 0; i < 5; ++i) (this->*stageFunc[order[i]])();
                 update();
                 if (ROB_COM.toCOM.IR.ins == HALT) {
                     std::cout << (RF_prev.regs[FUNCTION_RETURN].V & 255u) << '\n';
@@ -65,6 +56,8 @@ namespace RISC_V {
 
             //INPUT_OUTPUT
             CDBNode IS_RF, COM_RF, IS_RS, RS_EX, IS_ROB, ROB_COM, IS_SLB, EX_PUB, COM_PUB, SLB_PUB_prev, SLB_PUB_nxt;
+
+            int memClock;
 
             void issue();
             void execute();

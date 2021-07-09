@@ -148,7 +148,7 @@ namespace RISC_V {
         size_t siz;
 
     public:
-        Queue<SLBNode> q;
+        Queue<SLBNode, SIZ> q;
 
         StoreLoadBuffer(): siz(0), q() {}
 
@@ -215,7 +215,6 @@ namespace RISC_V {
             toPUB_rd = toPUB_ALUOut = toPUB_loadOut = toPUB_tarpc = 0; toPUB_ROB_id = -1;
             toPUB_hit = false;
             toPUB_jumpFlag = false; //remember clear
-            //don't clear isCommit
         }
 
         void debug(CDBType type) {

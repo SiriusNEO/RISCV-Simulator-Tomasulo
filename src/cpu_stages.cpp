@@ -142,12 +142,14 @@ namespace RISC_V {
         SLB_PUB_nxt.clear();
         if (!SLB_prev.q.empty()) {
             auto& qf = SLB_prev.q.getHead();
-            if (qf.isReady()) {
-                if (qf.tim == -1) { //mem 3 cycle
-                    SLB_nxt.q.getHead().tim = 2;
-                }
-                else if (qf.tim > 0) {
-                    SLB_nxt.q.getHead().tim = qf.tim - 1;
+            if (memClock) memClock--;
+            if (!memClock && qf.isReady()) {
+                if (qf.IR.ins > LHU && qf.tim == -1) {
+                    SLB_PUB_nxt.valid = true; //SLB->ROB, make it ready
+                    SLB_PUB_nxt.toPUB_inst = qf.IR;
+                    SLB_PUB_nxt.toPUB_rd = qf.IR.rd;
+                    SLB_PUB_nxt.toPUB_ROB_id = qf.ROB_id; //S loadOut does not matter
+                    SLB_nxt.q.getHead().tim = 0;
                 }
                 else {
                     auto memTar = qf.V1 + qf.IR.imm;
@@ -155,8 +157,9 @@ namespace RISC_V {
                     SLB_PUB_nxt.toPUB_inst = qf.IR;
                     SLB_PUB_nxt.toPUB_rd = qf.IR.rd;
                     SLB_PUB_nxt.toPUB_ROB_id = qf.ROB_id;
-                    SLB_nxt.deque();
                     if (qf.IR.ins <= LHU) {
+                        SLB_nxt.deque();
+                        memClock = 3;
                         switch (qf.IR.ins) {
                             case LB: {
                                 SLB_PUB_nxt.toPUB_loadOut = mem.reads(memTar, 1);
@@ -180,6 +183,9 @@ namespace RISC_V {
                                 break;
                         }
                     } else {
+                        if (COM_PUB.valid && COM_PUB.toPUB_inst == qf.IR) {
+                            SLB_nxt.deque();
+                            memClock = 3;
                             switch (qf.IR.ins) {
                                 case SB: {
                                     mem.write(memTar, qf.V2, 1);
@@ -194,6 +200,7 @@ namespace RISC_V {
                                 }
                                     break;
                             }
+                        }
                     }
                 }
             }
@@ -214,6 +221,7 @@ namespace RISC_V {
         if (COM_RF.valid) {
             //RF_nxt.writeQ(COM_RF.toRF_rd, COM_RF.toRF.Q);
             //RF_nxt.writeV(COM_RF.toRF_rd, COM_RF.toRF.V);
+            if (COM_RF.toRF_rd > 32) std::cout << COM_RF.toRF_rd << '\n';
             if (COM_RF.toRF_rd) {
                 if (RF_nxt.regs[COM_RF.toRF_rd].Q == COM_RF.toRF.Q)
                     RF_nxt.regs[COM_RF.toRF_rd].Q = -1;
@@ -258,8 +266,8 @@ namespace RISC_V {
                                SLB_PUB_prev.toPUB_tarpc, EX_PUB.toPUB_ROB_id};
         }
         ROB_COM.clear();
-        if (!ROB_nxt.empty()) {
-            auto& qf = ROB_nxt.getHead();
+        if (!ROB_prev.empty()) {
+            auto& qf = ROB_prev.getHead();
             if (qf.ready) {
                 ROB_COM.valid = true;
                 ROB_COM.toCOM = qf;
