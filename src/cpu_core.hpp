@@ -35,13 +35,9 @@ namespace RISC_V {
 #endif
                     break;
                 }
-                /*
                 issue();
                 execute();
                 commit();
-                */
-                std::random_shuffle(order1, order1+3);
-                for (int i = 0; i < 3; ++i) (this->*logic[order1[i]])();
 #ifdef DEBUG
                 RF_nxt.display();
 #endif
@@ -50,8 +46,6 @@ namespace RISC_V {
         private:
             void (CPU::*sequential[5])() = {&CPU::instructionQueue, &CPU::regFile, &CPU::reservation,
                                            &CPU::storeLoadBuffer, &CPU::reorderBuffer};
-            void (CPU::*logic[3])() = {&CPU::issue, &CPU::execute, &CPU::commit};
-
             uint32_t pc;
             Decoder id;
             Memory mem;
