@@ -128,7 +128,6 @@ namespace RISC_V {
         SLB_nxt = SLB_prev;
         SLB_PUB_nxt = SLB_PUB_prev;
 
-        assert(!SLB_nxt.q.full()); //will it full?
         if (COM_PUB.toPUB_jumpFlag) {
             SLB_prev.clear(), SLB_nxt.clear();
             IS_SLB.clear();
